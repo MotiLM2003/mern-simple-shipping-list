@@ -20,7 +20,7 @@ app.use('/items/', itemRoutes);
 
 // coonect to mongodb;
 mongoose
-  .connect(db.mongoURI)
+  .connect(db.mongoURI, { useFindAndModify: false })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
 
