@@ -14,6 +14,8 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
+// items routes
+app.use('/items/', itemRoutes);
 // DB  Configuration
 
 // coonect to mongodb;
