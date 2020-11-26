@@ -6,3 +6,25 @@
 html {
   font-size: 65.2%;
 }
+
+.remove-btn {
+  margin-right: 0.5rem;
+}
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: 0.5s ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: 0.5s ease-out;
+}

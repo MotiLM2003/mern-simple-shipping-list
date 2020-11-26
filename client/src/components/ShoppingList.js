@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuidv4 } from 'uuid';
-import { Container, Button } from 'reactstrap';
+import { Container, Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 const ShoppingList = () => {
   const [items, setItems] = useState(() => {
@@ -20,15 +20,35 @@ const ShoppingList = () => {
         onClick={() => {
           const name = prompt('Enter Item');
           if (name) {
-            //setItems
-            console.log('test');
             setItems([...items, { id: uuidv4(), name }]);
           }
         }}
       >
-        {' '}
         Add Item
       </Button>
+
+      <ListGroup>
+        <TransitionGroup classname='shopping-list'>
+          {items.map(({ id, name }) => (
+            <CSSTransition key={id} timeout={500} classNames='fade'>
+              <ListGroupItem>
+                <Button
+                  classname='remove-btn'
+                  color='danger'
+                  size='md'
+                  style={{ padding: '.5rem', marginRight: '.5rem' }}
+                  onClick={() => {
+                    setItems(items.filter((item) => item.id !== id));
+                  }}
+                >
+                  &times;
+                </Button>
+                {name}
+              </ListGroupItem>
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+      </ListGroup>
     </Container>
   );
 };

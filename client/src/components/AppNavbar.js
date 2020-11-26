@@ -18,7 +18,7 @@ const AppNavbar = () => {
   };
   return (
     <div>
-      <Navbar color='dark' dark expend='sm' classnames='mb-5'>
+      <Navbar color='dark' dark expend='sm' classname='mb-5'>
         <Container>
           <NavbarBrand>Shopping List</NavbarBrand>
 
