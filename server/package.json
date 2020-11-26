@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon --experimental-modules server.js"
+    "server": "nodemon --experimental-modules server.js",
+    "client" : "cd ../client && npm run start",
+    "dev" : "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "Moti Elmakies",
