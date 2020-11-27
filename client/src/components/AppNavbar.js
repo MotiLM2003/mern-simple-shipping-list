@@ -18,13 +18,13 @@ const AppNavbar = () => {
   };
   return (
     <div>
-      <Navbar color='dark' dark expend='sm' classname='mb-5'>
+      <Navbar color='dark' dark expend='sm' className='mb-5'>
         <Container>
           <NavbarBrand>Shopping List</NavbarBrand>
 
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav classname='ml-auto'>
+            <Nav className='ml-auto'>
               <NavItem>
                 <NavLink href='https://ww.google.com'>Google </NavLink>
               </NavItem>
