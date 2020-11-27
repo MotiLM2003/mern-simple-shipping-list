@@ -20,7 +20,16 @@ export default (state = initialState, action) => {
     case GET_ITEMS: {
       return { ...state };
     }
+    case ADD_ITEM: {
+      const newItems = { items: [...state.items, action.payload] };
 
+      return { ...newItems };
+    }
+
+    case DELETE_ITEM: {
+      console.log(action.payload);
+      return { items: state.items.filter((x) => x.id !== action.payload) };
+    }
     default: {
       return state;
     }
