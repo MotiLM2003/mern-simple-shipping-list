@@ -21,14 +21,29 @@ export default (state = initialState, action) => {
       return { ...state };
     }
     case ADD_ITEM: {
-      const newItems = { items: [...state.items, action.payload] };
+      const newItems = {
+        ...state,
+        items: [...state.items, action.payload],
+      };
 
       return { ...newItems };
     }
 
     case DELETE_ITEM: {
-      console.log(action.payload);
-      return { items: state.items.filter((x) => x.id !== action.payload) };
+      return {
+        ...state,
+        items: state.items.filter((x) => x.id !== action.payload),
+      };
+    }
+
+    case UPDATE_ITEM: {
+      console.log('in update item');
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          return item;
+        }),
+      };
     }
     default: {
       return state;

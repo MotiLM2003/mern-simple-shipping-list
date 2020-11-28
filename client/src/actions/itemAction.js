@@ -19,3 +19,10 @@ export const deleteItem = (id) => {
     payload: id,
   };
 };
+
+export const updateItem = (item) => {
+  return {
+    type: UPDATE_ITEM,
+    payload: item,
+  };
+};

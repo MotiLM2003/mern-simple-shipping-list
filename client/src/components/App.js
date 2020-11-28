@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app.css';
 import AppNavbar from './AppNavbar';
-import ShoppingList from './ShoppingList';
+import ShoppingList from './/ShoppingList/ShoppingList';
 
 const App = () => {
   return (
