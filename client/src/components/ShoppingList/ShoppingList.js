@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { v4 as uuidv4 } from 'uuid';
 import { Container, Button, ListGroup, ListGroupItem } from 'reactstrap';
@@ -9,11 +9,21 @@ import {
   deleteItem,
   updateItem,
 } from '../../actions/itemAction';
+
+import { setStatus, updateModel } from '../../actions/itemModelActions';
 import PropsTypes from 'prop-types';
 import ShoppingListItem from './ShoppingListItem';
 
-const ShoppingList = ({ getItems, item, addItem, deleteItem, updateItem }) => {
-  //   const [items, setItems] = useState(item.items);
+const ShoppingList = ({
+  getItems,
+  item,
+  addItem,
+  deleteItem,
+  updateItem,
+  setStatus,
+  updateModel,
+}) => {
+  const newItemNameRef = useRef();
 
   useEffect(() => {
     // getting list of items;
@@ -29,18 +39,39 @@ const ShoppingList = ({ getItems, item, addItem, deleteItem, updateItem }) => {
     deleteItem(id);
   };
 
+  const onUpdateModel = (itemModel) => {
+    const model = {
+      header: 'Updated Redux header',
+      jsx: <div>Hello world</div>,
+      isOpen: true,
+    };
+    updateModel(itemModel);
+  };
+
+  // const renderNewItem = () => ({
+  //   header: 'Add new item',
+  //   jsx: (
+  //     <div>
+  //       <div>name:</div>
+  //       <diiv>
+  //         <input type='text' ref={newItemNameRef} />
+  //         <button
+  //           onClick={() => {
+  //             // addItem({name});
+  //           }}
+  //         >
+  //           Add
+  //         </button>
+  //       </diiv>
+  //     </div>
+  //   ),
+  //   isOpen: true,
+  // });
+
   return (
     <Container>
-      <Button
-        color='dark'
-        style={{ marginBottom: '2rem' }}
-        onClick={() => {
-          const name = prompt('Enter Item');
-          if (name) {
-            addItem({ id: uuidv4(), name });
-          }
-        }}
-      >
+      <button onClick={onUpdateModel}>Test</button>
+      <Button color='dark' style={{ marginBottom: '2rem' }}>
         Add Item
       </Button>
 
@@ -70,6 +101,7 @@ ShoppingList.propTypes = {
 
 const stateToProps = (state) => ({
   item: state.item,
+  itemModel: state.itemModel,
 });
 
 export default connect(stateToProps, {
@@ -77,4 +109,6 @@ export default connect(stateToProps, {
   addItem,
   deleteItem,
   updateItem,
+  setStatus,
+  updateModel,
 })(ShoppingList);

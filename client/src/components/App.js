@@ -4,19 +4,26 @@ import '../app.css';
 import AppNavbar from './AppNavbar';
 import ShoppingList from './/ShoppingList/ShoppingList';
 import ItemModel from './ItemModel/ItemModel';
+import { connect } from 'react-redux';
 
-const App = () => {
+const App = ({ itemModel }) => {
   return (
     <div className='App'>
       <AppNavbar />
 
       <ShoppingList />
 
-      <ItemModel header='This is a header-1'>
-        and this is the content-1!
-      </ItemModel>
+      {itemModel.isOpen && (
+        <ItemModel header='This is a header-1'>
+          and this is the content-1!
+        </ItemModel>
+      )}
     </div>
   );
 };
 
-export default App;
+const stateToProps = (state) => ({
+  itemModel: state.itemModel,
+});
+
+export default connect(stateToProps)(App);

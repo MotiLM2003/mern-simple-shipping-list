@@ -17,11 +17,10 @@ export const getItems = async (req, res) => {
 export const createItem = async (req, res) => {
   const item = req.body;
   const newItem = new ItemModel(item);
-  console.log(newItem);
+
   try {
     const results = await newItem.save();
     res.status(201).json(results);
-    console.log('create', results);
   } catch (error) {
     console.log(error);
   }
