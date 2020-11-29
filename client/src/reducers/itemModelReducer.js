@@ -15,9 +15,9 @@ export default (state = intialState, action) => {
     case ItemsModelTyps.UPDATE_MODEL: {
       return { ...action.payload };
     }
-    // case ItemsModelTyps.CLOSE_MODEL: {
-    //   return state;
-    // }
+    case ItemsModelTyps.CLOSE_MODEL: {
+      return { ...intialState };
+    }
   }
 
   return state;

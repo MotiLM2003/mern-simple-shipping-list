@@ -10,6 +10,6 @@ export const updateModel = (model) => ({
   payload: model,
 });
 
-// export const closeMode = () => ({
-//   type : ItemsModelTyps.CLOSE
-// })
+export const closeModel = () => ({
+  type: ItemsModelTyps.CLOSE_MODEL,
+});

@@ -10,7 +10,11 @@ import {
   updateItem,
 } from '../../actions/itemAction';
 
-import { setStatus, updateModel } from '../../actions/itemModelActions';
+import {
+  setStatus,
+  updateModel,
+  closeModel,
+} from '../../actions/itemModelActions';
 import PropsTypes from 'prop-types';
 import ShoppingListItem from './ShoppingListItem';
 
@@ -22,6 +26,7 @@ const ShoppingList = ({
   updateItem,
   setStatus,
   updateModel,
+  closeModel,
 }) => {
   const newItemNameRef = useRef();
 
@@ -39,39 +44,55 @@ const ShoppingList = ({
     deleteItem(id);
   };
 
-  const onUpdateModel = (itemModel) => {
-    const model = {
-      header: 'Updated Redux header',
-      jsx: <div>Hello world</div>,
-      isOpen: true,
-    };
-    updateModel(itemModel);
-  };
+  const renderNewItem = () => ({
+    header: 'Add new item',
+    jsx: (
+      <div>
+        <div>name:</div>
+        <diiv>
+          <input type='text' ref={newItemNameRef} />
+          <button
+            onClick={() => {
+              addItem({ name: newItemNameRef.current.value });
+              closeModel();
+            }}
+          >
+            Add
+          </button>
+        </diiv>
+      </div>
+    ),
+    isOpen: true,
+  });
 
-  // const renderNewItem = () => ({
-  //   header: 'Add new item',
-  //   jsx: (
-  //     <div>
-  //       <div>name:</div>
-  //       <diiv>
-  //         <input type='text' ref={newItemNameRef} />
-  //         <button
-  //           onClick={() => {
-  //             // addItem({name});
-  //           }}
-  //         >
-  //           Add
-  //         </button>
-  //       </diiv>
-  //     </div>
-  //   ),
-  //   isOpen: true,
-  // });
+  const renderUpdateItem = (item) => ({
+    header: 'Update shopping item',
+    jsx: (
+      <div>
+        <div>name:</div>
+        <div>
+          <input type='text' ref={newItemNameRef} defaultValue={item.name} />
+          <button
+            onClick={() => {
+              onUpdate({ ...item, name: newItemNameRef.current.value });
+              closeModel();
+            }}
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    ),
+    isOpen: true,
+  });
 
   return (
     <Container>
-      <button onClick={onUpdateModel}>Test</button>
-      <Button color='dark' style={{ marginBottom: '2rem' }}>
+      <Button
+        color='dark'
+        style={{ marginBottom: '2rem' }}
+        onClick={() => updateModel(renderNewItem())}
+      >
         Add Item
       </Button>
 
@@ -81,7 +102,9 @@ const ShoppingList = ({
             <ShoppingListItem
               key={item.id}
               item={item}
-              onUpdate={onUpdate}
+              onUpdate={() => {
+                updateModel(renderUpdateItem(item));
+              }}
               onDelete={onDelete}
             />
           );
@@ -111,4 +134,5 @@ export default connect(stateToProps, {
   updateItem,
   setStatus,
   updateModel,
+  closeModel,
 })(ShoppingList);

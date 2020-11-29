@@ -37,11 +37,12 @@ export default (state = initialState, action) => {
     }
 
     case UPDATE_ITEM: {
-      console.log('in update item');
       return {
         ...state,
         items: state.items.map((item) => {
-          return item;
+          console.log(action.payload);
+          const newItem = item.id === action.payload.id ? action.payload : item;
+          return newItem;
         }),
       };
     }
