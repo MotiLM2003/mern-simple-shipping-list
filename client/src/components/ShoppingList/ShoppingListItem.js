@@ -1,12 +1,16 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { Button, ListGroupItem } from 'reactstrap';
+import { motion } from 'framer-motion';
 
 const ShoppingListItem = ({ item, onUpdate, onDelete }) => {
   const { id, name } = item;
 
   return (
-    <ListGroupItem>
+    <motion.ListGroupItem
+      className='shopping-list-item'
+      animate={{ opacity: 1 }}
+    >
       <Button
         className='update-btn'
         color='success'
@@ -31,7 +35,7 @@ const ShoppingListItem = ({ item, onUpdate, onDelete }) => {
       >
         &times;
       </Button>
-    </ListGroupItem>
+    </motion.ListGroupItem>
   );
 };
 
