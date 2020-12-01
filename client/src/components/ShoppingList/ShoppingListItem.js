@@ -1,6 +1,4 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
-import { Button, ListGroupItem } from 'reactstrap';
 import { itemsContainerVariants, itemsVariants } from './motionVarirants';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -13,29 +11,31 @@ const ShoppingListItem = ({ item, onUpdate, onDelete }) => {
         className='list-group-item shopping-list-item'
         variants={itemsVariants}
       >
-        <Button
-          className='update-btn'
-          color='success'
-          size='md'
-          style={{ padding: '.5rem', marginRight: '.5rem' }}
+        <button
+          className='btn btn-success update-btn '
+          style={{
+            padding: '.5rem',
+            marginRight: '.5rem',
+
+            color: '#fff',
+            fontSize: '1.2rem',
+          }}
           onClick={() => {
             onUpdate({ id, name });
           }}
         >
           +
-        </Button>
+        </button>
         {name}
-        <Button
-          className='float-right'
-          color='danger'
-          size='md'
+        <button
+          className='float-right btn-danger '
           style={{ padding: '.5rem', marginRight: '.5rem' }}
           onClick={() => {
             onDelete(id);
           }}
         >
           &times;
-        </Button>
+        </button>
       </motion.div>
     </AnimatePresence>
   );

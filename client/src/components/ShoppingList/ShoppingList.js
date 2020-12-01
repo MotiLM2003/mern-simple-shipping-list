@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TransitionGroup } from 'react-transition-group';
-import { v4 as uuidv4 } from 'uuid';
-import { Container, Button, ListGroup, ListGroupItem } from 'reactstrap';
 import { connect } from 'react-redux';
 import {
   getItems,
@@ -17,7 +14,7 @@ import {
 } from '../../actions/itemModelActions';
 import PropsTypes from 'prop-types';
 import ShoppingListItem from './ShoppingListItem';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { itemsContainerVariants } from './motionVarirants';
 
 const ShoppingList = ({
@@ -54,6 +51,8 @@ const ShoppingList = ({
         <diiv>
           <input type='text' ref={newItemNameRef} />
           <button
+            className='btn btn-dark'
+            className='btn btn-dark'
             onClick={() => {
               addItem({ name: newItemNameRef.current.value });
               closeModel();
@@ -90,13 +89,12 @@ const ShoppingList = ({
 
   return (
     <motion.div className='container'>
-      <Button
-        color='dark'
-        style={{ marginBottom: '2rem' }}
+      <buttno
+        className='btn btn-dark mb-2'
         onClick={() => updateModel(renderNewItem())}
       >
         Add Item
-      </Button>
+      </buttno>
 
       <motion.div
         className='list-group'
