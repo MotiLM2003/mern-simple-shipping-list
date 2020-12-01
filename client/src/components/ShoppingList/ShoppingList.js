@@ -17,6 +17,8 @@ import {
 } from '../../actions/itemModelActions';
 import PropsTypes from 'prop-types';
 import ShoppingListItem from './ShoppingListItem';
+import { motion } from 'framer-motion';
+import { itemsContainerVariants } from './motionVarirants';
 
 const ShoppingList = ({
   getItems,
@@ -87,7 +89,7 @@ const ShoppingList = ({
   });
 
   return (
-    <Container>
+    <motion.div className='container'>
       <Button
         color='dark'
         style={{ marginBottom: '2rem' }}
@@ -96,7 +98,12 @@ const ShoppingList = ({
         Add Item
       </Button>
 
-      <ListGroup>
+      <motion.div
+        className='list-group'
+        variants={itemsContainerVariants}
+        initial='hidden'
+        animate='visible'
+      >
         {item.items.map((item) => {
           return (
             <ShoppingListItem
@@ -109,8 +116,8 @@ const ShoppingList = ({
             />
           );
         })}
-      </ListGroup>
-    </Container>
+      </motion.div>
+    </motion.div>
   );
 };
 

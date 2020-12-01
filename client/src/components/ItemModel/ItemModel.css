@@ -1,5 +1,4 @@
 .item-model-container {
-  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -34,4 +33,29 @@
 }
 
 .item-model-box .content {
+}
+
+.item-model-box .content input[type='text'] {
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #0096c7;
+  padding: 2px;
+  margin: 1px;
+}
+
+.item-model-box .content button {
+  border: 1px solid #caf0f8;
+  outline: none;
+  padding: 0.1rem;
+  min-width: 8rem;
+  margin: 0.3rem;
+  background-color: #caf0f8;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.item-model-box .content button:hover {
+  background-color: #0077b6;
+  transition: 1s;
 }
