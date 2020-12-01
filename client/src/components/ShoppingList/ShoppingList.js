@@ -89,12 +89,12 @@ const ShoppingList = ({
 
   return (
     <motion.div className='container'>
-      <buttno
+      <button
         className='btn btn-dark mb-2'
         onClick={() => updateModel(renderNewItem())}
       >
         Add Item
-      </buttno>
+      </button>
 
       <motion.div
         className='list-group'
