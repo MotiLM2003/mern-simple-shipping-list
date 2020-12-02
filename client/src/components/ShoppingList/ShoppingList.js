@@ -34,9 +34,6 @@ const ShoppingList = ({
     getItems();
   }, [getItems]);
 
-  useEffect(() => {
-    console.log('now');
-  }, [newItemNameRef]);
   const onUpdate = (item) => {
     updateItem(item);
   };
@@ -51,9 +48,9 @@ const ShoppingList = ({
       <div>
         <div>name:</div>
         <div className='add-content-area'>
-          <input type='text' ref={newItemNameRef} autofocus />
+          <input type='text' ref={newItemNameRef} />
           <button
-            className='add-content-area'
+            className='btn btn-primary'
             onClick={() => {
               addItem({ name: newItemNameRef.current.value });
               closeModel();
@@ -93,15 +90,22 @@ const ShoppingList = ({
     isOpen: true,
   });
 
+  const setFocus = () => {
+    setTimeout(() => {
+      if (newItemNameRef.current !== undefined) {
+        console.log(newItemNameRef.current);
+        newItemNameRef.current.focus();
+        newItemNameRef.current.select();
+      }
+    }, 1000);
+  };
   return (
     <motion.div className='container'>
       <button
         className='btn btn-dark mb-2'
         onClick={() => {
           updateModel(renderNewItem());
-          setTimeout(() => {
-            console.log(newItemNameRef.current.focus());
-          }, 1000);
+          setFocus();
         }}
       >
         Add Item
@@ -122,6 +126,7 @@ const ShoppingList = ({
                   item={item}
                   onUpdate={() => {
                     updateModel(renderUpdateItem(item));
+                    setFocus();
                   }}
                   onDelete={onDelete}
                 />
