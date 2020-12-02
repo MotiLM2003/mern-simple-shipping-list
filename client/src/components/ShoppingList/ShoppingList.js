@@ -14,7 +14,7 @@ import {
 } from '../../actions/itemModelActions';
 import PropsTypes from 'prop-types';
 import ShoppingListItem from './ShoppingListItem';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { itemsContainerVariants } from './motionVarirants';
 
 const ShoppingList = ({
@@ -48,11 +48,10 @@ const ShoppingList = ({
     jsx: (
       <div>
         <div>name:</div>
-        <diiv>
+        <div className='add-content-area'>
           <input type='text' ref={newItemNameRef} />
           <button
-            className='btn btn-dark'
-            className='btn btn-dark'
+            className='add-content-area'
             onClick={() => {
               addItem({ name: newItemNameRef.current.value });
               closeModel();
@@ -60,7 +59,7 @@ const ShoppingList = ({
           >
             Add
           </button>
-        </diiv>
+        </div>
       </div>
     ),
     isOpen: true,
@@ -95,26 +94,30 @@ const ShoppingList = ({
       >
         Add Item
       </button>
-
-      <motion.div
-        className='list-group'
-        variants={itemsContainerVariants}
-        initial='hidden'
-        animate='visible'
-      >
-        {item.items.map((item) => {
-          return (
-            <ShoppingListItem
-              key={item.id}
-              item={item}
-              onUpdate={() => {
-                updateModel(renderUpdateItem(item));
-              }}
-              onDelete={onDelete}
-            />
-          );
-        })}
-      </motion.div>
+      <AnimateSharedLayout>
+        <motion.div
+          layout
+          className='list-group'
+          variants={itemsContainerVariants}
+          initial='hidden'
+          animate='visible'
+        >
+          <AnimatePresence>
+            {item.items.map((item) => {
+              return (
+                <ShoppingListItem
+                  key={item.id}
+                  item={item}
+                  onUpdate={() => {
+                    updateModel(renderUpdateItem(item));
+                  }}
+                  onDelete={onDelete}
+                />
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
+      </AnimateSharedLayout>
     </motion.div>
   );
 };

@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app.css';
 import ShoppingList from './/ShoppingList/ShoppingList';
 import ItemModel from './ItemModel/ItemModel';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const temp = {
   hidden: {
@@ -13,10 +12,6 @@ const temp = {
   visible: { opacity: 1 },
 };
 const App = ({ itemModel }) => {
-  const [on, setOn] = useState(true);
-  setTimeout(() => {
-    setOn(false);
-  }, 2000);
   return (
     <div className='App'>
       <nav
@@ -28,21 +23,6 @@ const App = ({ itemModel }) => {
         </div>
       </nav>
       <ShoppingList />
-
-      <AnimatePresence>
-        {on && (
-          <motion.div exit={{ y: '-100vh' }}>
-            <h1>Hello</h1>
-            <h1>Hello</h1>
-            <h1>Hello</h1>
-            <h1>Hello</h1>
-            <h1>Hello</h1>
-            <h1>Hello</h1>
-            <h1>Hello</h1>
-            <h1>Hello</h1>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {itemModel.isOpen && (
         <ItemModel
