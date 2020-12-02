@@ -28,13 +28,15 @@ const ShoppingList = ({
   closeModel,
 }) => {
   const newItemNameRef = useRef();
-
+  useEffect(() => {}, []);
   useEffect(() => {
     // getting list of items;
-
     getItems();
   }, [getItems]);
 
+  useEffect(() => {
+    console.log('now');
+  }, [newItemNameRef]);
   const onUpdate = (item) => {
     updateItem(item);
   };
@@ -44,12 +46,12 @@ const ShoppingList = ({
   };
 
   const renderNewItem = () => ({
-    header: 'Add new item',
+    header: 'Add new item ',
     jsx: (
       <div>
         <div>name:</div>
         <div className='add-content-area'>
-          <input type='text' ref={newItemNameRef} />
+          <input type='text' ref={newItemNameRef} autofocus />
           <button
             className='add-content-area'
             onClick={() => {
@@ -71,7 +73,12 @@ const ShoppingList = ({
       <div>
         <div>name:</div>
         <div>
-          <input type='text' ref={newItemNameRef} defaultValue={item.name} />
+          <input
+            type='text'
+            ref={newItemNameRef}
+            defaultValue={item.name}
+            autofocus
+          />
           <button
             onClick={() => {
               onUpdate({ ...item, name: newItemNameRef.current.value });
@@ -90,7 +97,12 @@ const ShoppingList = ({
     <motion.div className='container'>
       <button
         className='btn btn-dark mb-2'
-        onClick={() => updateModel(renderNewItem())}
+        onClick={() => {
+          updateModel(renderNewItem());
+          setTimeout(() => {
+            console.log(newItemNameRef.current.focus());
+          }, 1000);
+        }}
       >
         Add Item
       </button>
